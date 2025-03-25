@@ -16,15 +16,20 @@ def find(pvkhex):
 
     print(pvkhex, addr)
 
-print("Searching BTC:>")
-while True:
-    try:
-        ts : list[Thread] = []
-        for pvkhex in getHexes(): 
-            t = Thread(target=find, args=(pvkhex,))
-            t.start()
-            ts.append(t)
-        for t in ts: t.join()
-    except InterruptedError: exit()
-    except Exception as e:
-        print(e)
+# print("Searching BTC:>")
+
+import helper
+
+print(helper.num_to_hex64(128928282982))
+
+# while True:
+#     try:
+#         ts : list[Thread] = []
+#         for pvkhex in getHexes(): 
+#             t = Thread(target=find, args=(pvkhex,))
+#             t.start()
+#             ts.append(t)
+#         for t in ts: t.join()
+#     except InterruptedError: exit()
+#     except Exception as e:
+#         print(e)

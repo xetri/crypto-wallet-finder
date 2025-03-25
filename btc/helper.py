@@ -55,11 +55,9 @@ def pvkhex_to_address_uncompressed(z):
     return btc_uncompressed_address_std
 
 def pvkhex_to_address_compressed(z):
-    pvk_to_bytes = codecs.decode(z, 'hex')
-
-    key = ecdsa.SigningKey.from_string(pvk_to_bytes, curve=ecdsa.SECP256k1).verifying_key
-    key_bytes = key.to_string()
-    key_hex = codecs.encode(key_bytes, 'hex').decode('utf-8')
+    zk = ecdsa.SigningKey.from_string(codecs.decode(z, 'hex'), curve=ecdsa.SECP256k1)
+    vk = zk.verifying_key
+    key_hex = codecs.encode(vk.to_string(), 'hex').decode('utf-8')
 
     if ord(bytearray.fromhex(key_hex[-2:])) % 2 == 0: public_key_compressed = '02' + key_hex[0:64]
     else:  public_key_compressed = '03' + key_hex[0:64]
